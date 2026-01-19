@@ -103,9 +103,7 @@ fig = px.scatter(
 st.plotly_chart(fig, use_container_width=True)
 
 
-age_summary = enrolment.groupby("state")[[
-    "age_0_5", "age_5_17", "age_18_greater"
-]].sum().reset_index()
+
 
 age_melt = age_state_filtered.melt(
     id_vars="state",
@@ -130,6 +128,7 @@ high_risk = intelligence[intelligence["risk_level"] == "High"][
 ]
 
 st.dataframe(high_risk)
+
 
 
 
