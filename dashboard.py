@@ -36,13 +36,15 @@ st.markdown(
 )
 
 
-# Create state list from deployed dataset
+# Create state list
 state_list = sorted(district_month["state"].unique())
 
 # Sidebar dropdown
 selected_state = st.sidebar.selectbox(
     "Select State",
     state_list
+)
+
     # Filter age data for selected state
 age_state_filtered = age_state[
     age_state["state"] == selected_state
@@ -126,6 +128,7 @@ high_risk = intelligence[intelligence["risk_level"] == "High"][
 ]
 
 st.dataframe(high_risk)
+
 
 
 
