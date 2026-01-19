@@ -20,6 +20,9 @@ DATA_DIR = os.path.join(BASE_DIR, "output")
 district_month = pd.read_csv(
     os.path.join(DATA_DIR, "district_month_features.csv")
 )
+age_state = pd.read_csv(
+    os.path.join(DATA_DIR, "age_state_summary.csv")
+)
 
 intelligence = pd.read_csv(
     os.path.join(DATA_DIR, "enrolment_intelligence.csv")
@@ -40,6 +43,12 @@ state_list = sorted(district_month["state"].unique())
 selected_state = st.sidebar.selectbox(
     "Select State",
     state_list
+    # Filter age data for selected state
+age_state_filtered = age_state[
+    age_state["state"] == selected_state
+]
+
+    
 )
 
 
@@ -94,7 +103,7 @@ age_summary = enrolment.groupby("state")[[
     "age_0_5", "age_5_17", "age_18_greater"
 ]].sum().reset_index()
 
-age_data = age_summary.melt(
+age_melt = age_state_filtered.melt(
     id_vars="state",
     value_vars=["age_0_5", "age_5_17", "age_18_greater"],
     var_name="Age Group",
@@ -102,22 +111,22 @@ age_data = age_summary.melt(
 )
 
 fig = px.pie(
-    age_data,
+    age_melt,
     names="Age Group",
     values="Enrolments",
-    title="Age-wise Enrolment Composition"
+    title="Age-wise Enrolment Distribution"
 )
 
-st.plotly_chart(fig, use_container_width=True)
+st.plotly_chart(fig, width="stretch")
 
-
-st.subheader("🚨 High-Risk Districts")
+st.subheader("👶🧑 Age-wise Enrolment Composition")
 
 high_risk = intelligence[intelligence["risk_level"] == "High"][
     ["district", "mean_enrolments", "volatility", "risk_score"]
 ]
 
 st.dataframe(high_risk)
+
 
 
 
