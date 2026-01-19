@@ -46,7 +46,7 @@ selected_state = st.sidebar.selectbox(
 
 district_month = district_month[district_month["state"] == selected_state]
 intelligence = intelligence[intelligence["state"] == selected_state]
-enrolment = enrolment[enrolment["state"] == selected_state]
+#enrolment = enrolment[enrolment["state"] == selected_state]
 
 trend = (
     district_month.groupby(["year", "month"])["enrolments"]
@@ -118,5 +118,6 @@ high_risk = intelligence[intelligence["risk_level"] == "High"][
 ]
 
 st.dataframe(high_risk)
+
 
 
