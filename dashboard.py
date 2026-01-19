@@ -33,7 +33,8 @@ st.markdown(
 )
 
 
-state_list = sorted(enrolment["state"].unique())
+state_list = sorted(district_month["state"].unique())
+
 selected_state = st.sidebar.selectbox("Select State", state_list)
 
 
@@ -111,4 +112,5 @@ high_risk = intelligence[intelligence["risk_level"] == "High"][
 ]
 
 st.dataframe(high_risk)
+
 
