@@ -53,7 +53,7 @@ age_state_filtered = age_state[
 ]
 
     
-)
+
 
 
 
@@ -130,6 +130,7 @@ high_risk = intelligence[intelligence["risk_level"] == "High"][
 ]
 
 st.dataframe(high_risk)
+
 
 
 
