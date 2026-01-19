@@ -33,9 +33,15 @@ st.markdown(
 )
 
 
+# Create state list from deployed dataset
 state_list = sorted(district_month["state"].unique())
 
-selected_state = st.sidebar.selectbox("Select State", state_list)
+# Sidebar dropdown
+selected_state = st.sidebar.selectbox(
+    "Select State",
+    state_list
+)
+
 
 
 district_month = district_month[district_month["state"] == selected_state]
