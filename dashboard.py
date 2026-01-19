@@ -1,15 +1,30 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import os
 
-st.set_page_config(page_title="UIDAI Enrolment Intelligence", layout="wide")
+st.set_page_config(
+    page_title="UIDAI Enrolment Intelligence",
+    layout="wide"
+)
 
-# Load datasets
-base_path = r"C:\Users\Shree\Desktop\uidai_hackathon\output"
+# ===============================
+# 📂 DEPLOYMENT-SAFE PATH SETUP
+# ===============================
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(BASE_DIR, "output")
 
-district_month = pd.read_csv(f"{base_path}\\district_month_features.csv")
-intelligence = pd.read_csv(f"{base_path}\\enrolment_intelligence.csv")
-enrolment = pd.read_csv(f"{base_path}\\enrolment_master.csv")
+# ===============================
+# 📊 LOAD ONLY REQUIRED DATASETS
+# ===============================
+district_month = pd.read_csv(
+    os.path.join(DATA_DIR, "district_month_features.csv")
+)
+
+intelligence = pd.read_csv(
+    os.path.join(DATA_DIR, "enrolment_intelligence.csv")
+)
+
 
 
 st.title("📊 Aadhaar Enrolment Intelligence Dashboard")
@@ -96,3 +111,4 @@ high_risk = intelligence[intelligence["risk_level"] == "High"][
 ]
 
 st.dataframe(high_risk)
+
